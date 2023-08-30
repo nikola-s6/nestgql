@@ -1,0 +1,98 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateDepartmentInput {
+  exams: [ExamInput!]
+  name: String!
+}
+
+input CreateExamAttemptInput {
+  examId: Int!
+  grade: Int!
+  studentId: Int!
+}
+
+input CreateExamInput {
+  department: DepartmentInput!
+  name: String!
+}
+
+input CreateStudentInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  yearStarted: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Department {
+  exams: [Exam]!
+  id: Int!
+  name: String!
+}
+
+input DepartmentInput {
+  id: Int!
+}
+
+type Exam {
+  department: Department!
+  id: Int!
+  name: String!
+  studentsAttempts: [StudentExam]!
+}
+
+input ExamInput {
+  name: String!
+}
+
+type Mutation {
+  addDepartment(createDepartmentInput: CreateDepartmentInput!): Department!
+  addExam(createExamInput: CreateExamInput!): Exam!
+  addExamAttempt(createExamAttemptInput: CreateExamAttemptInput!): StudentExam!
+  addStudent(createStudentInput: CreateStudentInput!): Student!
+  deleteStudent(id: Int!): Boolean!
+  updateExamAttempt(updateExamAttemptInput: UpdateExamAttemptInput!): StudentExam!
+  updateStudent(updateStudentInput: UpdateStudentInput!): Student!
+}
+
+type Query {
+  department(id: Int!): Department!
+  departments: [Department!]!
+  exam(id: Int!): Exam!
+  exams: [Exam!]!
+  student(id: Int!): Student!
+  students: [Student!]!
+}
+
+type Student {
+  email: String!
+  examAttempts: [StudentExam]!
+  firstName: String!
+  id: Int!
+  lastName: String!
+  yearStarted: String!
+}
+
+type StudentExam {
+  date: DateTime!
+  exam: Exam!
+  grade: Int!
+  id: Int!
+  student: Student!
+}
+
+input UpdateExamAttemptInput {
+  grade: Int!
+  id: Int!
+}
+
+input UpdateStudentInput {
+  email: String!
+  id: Int!
+}
