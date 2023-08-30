@@ -65,6 +65,7 @@ type Query {
   department(id: Int!): Department!
   departments: [Department!]!
   exam(id: Int!): Exam!
+  examAttempts: [StudentExam!]!
   exams: [Exam!]!
   student(id: Int!): Student!
   students: [Student!]!

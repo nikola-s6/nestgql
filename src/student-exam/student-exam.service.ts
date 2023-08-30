@@ -10,6 +10,15 @@ import { StudentExamRepository } from './student-exam.repository';
 export class StudentExamService {
   constructor(private readonly studentExamRepository: StudentExamRepository) {}
 
+  async getAll(): Promise<Array<StudentExam>> {
+    return this.studentExamRepository.find({
+      relations: {
+        exam: true,
+        student: true,
+      },
+    });
+  }
+
   async create(attempt: CreateExamAttemptInput): Promise<StudentExam> {
     const dbAttempt: StudentExam = await this.studentExamRepository.save(
       this.studentExamRepository.create({

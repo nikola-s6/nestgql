@@ -10,6 +10,11 @@ import {
 export class StudentExamResolver {
   constructor(private readonly studentExamService: StudentExamService) {}
 
+  @Query((returns) => [StudentExam], { name: 'examAttempts' })
+  async getExamAttempts(): Promise<Array<StudentExam>> {
+    return this.studentExamService.getAll();
+  }
+
   @Mutation((returns) => StudentExam)
   async addExamAttempt(
     @Args('createExamAttemptInput') attempt: CreateExamAttemptInput,
